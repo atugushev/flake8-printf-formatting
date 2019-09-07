@@ -13,6 +13,7 @@ class Visitor(ast.NodeVisitor):
     def visit_BinOp(self, node: ast.BinOp) -> None:
         if isinstance(node.op, ast.Mod) and isinstance(node.left, (ast.Str, ast.Bytes)):
             self.expressions.append((node.lineno, node.col_offset))
+        self.generic_visit(node)
 
 
 class Plugin:

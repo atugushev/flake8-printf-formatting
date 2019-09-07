@@ -16,11 +16,21 @@ def results():
 
 
 def test_str(results):
-    assert results("print('foo %s' % ('bar',))") == [EXPECTED_MESSAGE]
+    expected_message = "1:6: MOD001 do not use printf-style string formatting"
+    assert results("print('foo %s' % 'bar')") == [expected_message]
+
+
+def test_nested_expressions(results):
+    expected_messages = [
+        "1:6: MOD001 do not use printf-style string formatting",
+        "1:18: MOD001 do not use printf-style string formatting",
+    ]
+    assert results("print('foo %s' % ('bar %s' % 'baz'))") == expected_messages
 
 
 def test_bytes(results):
-    assert results("print(b'foo %s' % ('bar',))") == [EXPECTED_MESSAGE]
+    expected_message = "1:6: MOD001 do not use printf-style string formatting"
+    assert results("print(b'foo %s' % 'bar')") == [expected_message]
 
 
 def test_empty_string(results):
