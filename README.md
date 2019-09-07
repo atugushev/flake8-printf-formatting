@@ -1,3 +1,6 @@
+[![Build status](https://img.shields.io/travis/atugushev/flake8-printf-formatting/master.svg?logo=travis)](https://travis-ci.org/atugushev/flake8-printf-formatting)
+[![Coverage](https://codecov.io/gh/atugushev/flake8-printf-formatting/branch/master/graph/badge.svg)](https://codecov.io/gh/atugushev/flake8-printf-formatting)
+
 flake8-printf-formatting
 ========================
 
@@ -15,7 +18,7 @@ flake8 plugin which forbids printf-style string formatting
 
 ## Rationale
 
-The official Python 3 documentation [doesn't recommend](https://docs.python.org/3/library/stdtypes.html?highlight=sprintf#printf-style-string-formatting)
+The official Python 3 documentation [doesn't recommend](https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting)
 printf-style string formatting:
 
 > The formatting operations described here exhibit a variety of quirks that
