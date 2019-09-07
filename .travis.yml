@@ -1,0 +1,35 @@
+dist: xenial
+sudo: false
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8-dev"
+
+cache: false
+install:
+  - travis_retry pip install tox-travis
+script:
+  - tox
+
+stages:
+- lint
+- test
+
+jobs:
+  include:
+    # QA checks
+    - stage: lint
+      env: TOXENV=lint
+      python: 3.7
+      after_success: skip  # No need coverage
+      cache:
+        directories:
+          - $HOME/.cache/pre-commit
+
+  allow_failures:
+    - python: 3.8-dev
+
+after_success:
+  - travis_retry pip install codecov
+  - travis_retry codecov --required
