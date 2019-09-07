@@ -15,8 +15,6 @@ script:
 stages:
 - lint
 - test
-- name: deploy
-  if: repo = jazzband/pip-tools AND tag IS present
 
 jobs:
   include:
