@@ -4,8 +4,6 @@ import pytest
 
 from flake8_printf_formatting import Plugin
 
-EXPECTED_MESSAGE = "1:6: MOD001 do not use printf-style string formatting"
-
 
 @pytest.fixture
 def results():
@@ -15,12 +13,21 @@ def results():
     return _results
 
 
-def test_str(results):
+@pytest.mark.parametrize(
+    "code",
+    [
+        # Test strings
+        "print('foo %s' % 'bar')",
+        # Test bytes
+        "print(b'foo %s' % b'bar')",
+    ],
+)
+def test_complain_simple_expressions(results, code):
     expected_message = "1:6: MOD001 do not use printf-style string formatting"
-    assert results("print('foo %s' % 'bar')") == [expected_message]
+    assert results(code) == [expected_message]
 
 
-def test_nested_expressions(results):
+def test_complain_nested_expressions(results):
     expected_messages = [
         "1:6: MOD001 do not use printf-style string formatting",
         "1:18: MOD001 do not use printf-style string formatting",
@@ -28,22 +35,18 @@ def test_nested_expressions(results):
     assert results("print('foo %s' % ('bar %s' % 'baz'))") == expected_messages
 
 
-def test_bytes(results):
-    expected_message = "1:6: MOD001 do not use printf-style string formatting"
-    assert results("print(b'foo %s' % 'bar')") == [expected_message]
-
-
-def test_empty_string(results):
-    assert not results("")
-
-
-def test_str_format(results):
-    assert not results("print('foo {}'.format('bar'))")
-
-
-def test_term(results):
-    assert not results("42 % 10")
-
-
-def test_augmented_assignment(results):
-    assert not results("foo = 42; foo %= 10")
+@pytest.mark.parametrize(
+    "code",
+    [
+        # Test an empty string
+        "",
+        # Test str.format
+        "print('foo {}'.format('bar'))",
+        # Test a simple term
+        "42 % 10",
+        # Test augmented assignment
+        "foo = 42; foo %= 10",
+    ],
+)
+def test_ignore_other_expressions(results, code):
+    assert not results(code)
