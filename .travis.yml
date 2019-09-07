@@ -23,7 +23,7 @@ jobs:
   include:
     # QA checks
     - stage: lint
-      env: TOXENV=checkqa
+      env: TOXENV=lint
       python: 3.7
       after_success: skip  # No need coverage
       cache:
