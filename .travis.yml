@@ -15,6 +15,8 @@ script:
 stages:
 - lint
 - test
+- name: deploy
+  if: repo = atugushev/flake8-printf-formatting AND tag IS present
 
 jobs:
   include:
@@ -26,6 +28,22 @@ jobs:
       cache:
         directories:
           - $HOME/.cache/pre-commit
+
+    - stage: deploy
+      install: skip  # No need to install tox-travis on deploy.
+      script: skip  # No test on the deploy stage.
+      python: 3.7
+      env: skip  # No special env required.
+      after_success: true  # No need coverage, must be true, skip doesn't work
+      deploy:
+        provider: pypi
+        user: alikus
+        distributions: sdist bdist_wheel
+        password:
+          secure: trfyP0wNzqEMJ+xuzzCZoTe2N/AURr2o7Mw6DF4xYusnwu0vm3iPSGX9LWdsOvre7wLAHNv5mUC+WMCegYAkqEWXTc6qEgwxf3MLAqWbFjZo0nnaaKL9aLDreJmplqZbN+ZOfkK6s7QpnwbXxEFRhY5TsU08FDXcuHGAcXX44e+Y3+2cGoZMh08BwV8HvnVjUmvroah6ggYvuPS+Y1UnpwdoYHSEzmmKEwevBWATl+2Fx1WSLFXl/MsmAQu1h++haWI3B27hCHpnlQai4tiPzAfygl0Udeo2LZePxBxL/HkfYdxt+ngPwQxlHGxQ1SIIvuXWhFLy0PCbw58ho9p61cjQmLaa+/meZBKR1/hNW795ZBQW6X+4XmunxWVA24htbjMD6is/qdsG14r7/dq6D6ZOWL0753JMFzybkdL0T8pESzKcx2cio6FCe+rjVohLDYffpS4otmx8j86v8DpOQByoCa+Ds12/gKNnRASXp+rIQIePhOl3KNlLE9w5D1eRnY5utd+w+JnWx8acGtpUks8I3+eG1yhrYTzznPgVYGZrpBCUAbbM0Nlb2cWwcF3Qmc0RdTii/iVGjnwRPGto3mt+38APTiTEWy6waYaJgTDUUw8k5Vg0+LlsFpsGA34vXSqAUTemdexmAKDFM0kXT3xfXG6XPVLu9z5X/p2vOfk=
+        on:
+          tags: true
+          repo: atugushev/flake8-printf-formatting
 
   allow_failures:
     - python: 3.8-dev
