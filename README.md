@@ -43,3 +43,10 @@ Sample `.pre-commit-config.yaml`:
     -   id: flake8
         additional_dependencies: [flake8-printf-formatting]
 ```
+
+## Release process
+
+1. Add commit "Release vX.Y.Z".
+1. Make sure checks still pass.
+1. [Draft a new release](https://github.com/atugushev/flake8-printf-formatting/releases/new) with a tag name "X.Y.Z" and changes which involved in the release.
+1. Publish the release.
