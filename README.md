@@ -30,6 +30,18 @@ printf-style string formatting:
 > Each of these alternatives provides their own trade-offs and benefits of simplicity,
 > flexibility, and/or extensibility.
 
+### Bad
+
+```python
+print("Hello, %s!" % "World")
+```
+
+### Good
+
+```python
+print("Hello, {name}!".format(name="World"))
+```
+
 ## As a pre-commit hook
 
 See [pre-commit](https://github.com/pre-commit/pre-commit) for instructions
