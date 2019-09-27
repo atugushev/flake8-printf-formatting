@@ -13,7 +13,6 @@ script:
   - tox
 
 stages:
-- lint
 - test
 - name: deploy
   if: repo = atugushev/flake8-printf-formatting AND tag IS present
@@ -21,8 +20,7 @@ stages:
 jobs:
   include:
     # QA checks
-    - stage: lint
-      env: TOXENV=lint
+    - env: TOXENV=lint
       python: 3.7
       after_success: skip  # No need coverage
       cache:
