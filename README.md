@@ -33,13 +33,13 @@ printf-style string formatting:
 ### Bad
 
 ```python
-print("Hello, %s!" % "World")
+print("Hello, %s!" % name)
 ```
 
 ### Good
 
 ```python
-print("Hello, {name}!".format(name="World"))
+print("Hello, {name}!".format(name=name))
 ```
 
 ## As a pre-commit hook
