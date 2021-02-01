@@ -42,6 +42,12 @@ print("Hello, %s!" % name)
 print("Hello, {name}!".format(name=name))
 ```
 
+### Even better
+
+```python
+print(f"Hello, {name}!")
+```
+
 ## As a pre-commit hook
 
 See [pre-commit](https://github.com/pre-commit/pre-commit) for instructions
