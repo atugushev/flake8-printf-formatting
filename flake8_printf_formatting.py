@@ -1,7 +1,10 @@
 import ast
 from typing import Any, Generator, List, Tuple, Type
 
-import importlib_metadata
+try:
+    import importlib.metadata as importlib_metadata
+except ImportError:
+    import importlib_metadata  # python_version<'3.8'
 
 MOD001 = "MOD001 do not use printf-style string formatting"
 
