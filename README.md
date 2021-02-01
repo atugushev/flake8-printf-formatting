@@ -64,6 +64,7 @@ Sample `.pre-commit-config.yaml`:
 
 ## Release process
 
+1. Bump version in `setup.cfg`.
 1. Add a commit "Release vX.Y.Z".
 1. Make sure checks still pass.
 1. [Draft a new release](https://github.com/atugushev/flake8-printf-formatting/releases/new) with a tag name "X.Y.Z" and describe changes which involved in the release.
