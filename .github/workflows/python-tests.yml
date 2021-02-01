@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+
+jobs:
+  tests:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      matrix:
+        os:
+          - Ubuntu
+          - macOS
+          - Windows
+        python-version:
+          - 3.9
+          - 3.8
+          - 3.7
+          - 3.6
+    env:
+      PY_COLORS: 1
+      PYTEST_ADDOPTS: --strict --cov --cov-report=term-missing --cov-report=xml
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install test dependencies
+        run: python -m pip install tox-gh-actions
+      - name: Prepare test environment
+        run: tox --notest
+      - name: Test
+        run: tox
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          name: ${{ runner.os }}-${{ matrix.python-version }}
