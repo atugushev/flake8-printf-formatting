@@ -1,10 +1,11 @@
 import ast
+import sys
 from typing import Any, Generator, List, Tuple, Type
 
-try:
+if sys.version_info < (3, 8):  # pragma: no cover (<PY38)
+    import importlib_metadata
+else:  # pragma: no cover (PY38+)
     import importlib.metadata as importlib_metadata
-except ImportError:
-    import importlib_metadata  # python_version<'3.8'
 
 MOD001 = "MOD001 do not use printf-style string formatting"
 
