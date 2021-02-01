@@ -1,6 +1,6 @@
 [![PyPI version](https://img.shields.io/pypi/v/flake8-printf-formatting.svg)](https://pypi.org/project/flake8-printf-formatting/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/flake8-printf-formatting.svg)](https://pypi.org/project/flake8-printf-formatting/)
-[![Build status](https://img.shields.io/travis/atugushev/flake8-printf-formatting/master.svg?logo=travis)](https://travis-ci.org/atugushev/flake8-printf-formatting)
+![Tests](https://github.com/atugushev/flake8-printf-formatting/workflows/Tests/badge.svg)
 [![Coverage](https://codecov.io/gh/atugushev/flake8-printf-formatting/branch/master/graph/badge.svg)](https://codecov.io/gh/atugushev/flake8-printf-formatting)
 
 flake8-printf-formatting
